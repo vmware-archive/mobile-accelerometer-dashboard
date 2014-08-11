@@ -1,0 +1,11 @@
+<plugin name='d3' version='3.4.8.0' grailsVersion='2.0 &gt; *'>
+  <author>Jean-Louis Jouannic</author>
+  <authorEmail>jeanlouis.jouannic+d3grailsplugin@gmail.com</authorEmail>
+  <title>D3 resources</title>
+  <description>Provides resource files for the D3.js JavaScript library.</description>
+  <documentation>http://grails.org/plugin/d3</documentation>
+  <type>D3GrailsPlugin</type>
+  <resources>
+    <resource>D3Resources</resource>
+  </resources>
+</plugin>

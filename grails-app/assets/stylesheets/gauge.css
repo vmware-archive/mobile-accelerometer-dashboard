@@ -1,0 +1,42 @@
+.bar {
+  fill: steelblue;
+}
+.bar:hover {
+  fill: grey;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+
+.container {
+    display: block;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 600px;
+    white-space: nowrap;
+}
+.container div {
+    position: relative;
+    display: inline-block;
+}
+
+.containery {
+    float: left;
+    clear: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 500px;
+    width: 350px;
+}
+.containery div {
+    position: relative;
+}
