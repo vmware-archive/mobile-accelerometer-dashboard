@@ -2,6 +2,7 @@ class UrlMappings {
 
 	static mappings = {
 		"/api/acceleratorMovements"(resources: "accelerometerRest")
+		"/api/axisValues"(resources: "axisValueRest")
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here

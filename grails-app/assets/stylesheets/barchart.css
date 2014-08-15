@@ -1,0 +1,28 @@
+.bar {
+  fill: lightblue;
+  stroke:grey; 
+}
+.bar:hover {
+  fill: grey;
+}
+
+.listitem {
+  background-color:white;
+}
+.listitem:hover {
+  background-color:lightgrey;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+

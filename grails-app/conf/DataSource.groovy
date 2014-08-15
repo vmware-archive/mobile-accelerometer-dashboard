@@ -17,7 +17,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:sqlfire://pivhdsne:1527/"
 			user = "app"
 			password = app

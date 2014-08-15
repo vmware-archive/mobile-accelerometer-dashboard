@@ -6,10 +6,18 @@ import static groovyx.net.http.ContentType.JSON
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.URLENC
 
-def http = new HTTPBuilder( 'http://localhost:8080' )
 
+RESTClient client = new RESTClient('http://localhost:8080/', ContentType.JSON)
+
+def response = client.get(path: 'mobile-accelerometer-dashboard/api/accelerometerMovements/1.json')
+response.status == 200
+response.contentType == 'application/json'
+response.data.size() == 590
+
+/*
+def http = new HTTPBuilder( 'http://localhost:8080/')
 http.request(GET, JSON) {
-    url.path = '/mobile-accelerometer-dashboard/api/accelerometerMovements' 
+    url.path = 'mobile-accelerometer-dashboard/api/accelerometerMovements' 
     
     response.success = { resp, json ->
         println resp.status
@@ -20,14 +28,13 @@ http.request(GET, JSON) {
     }
 }
 
-/*
-
-def httpPost = new HTTPBuilder( 'http://localhost:8080/mobile-accelerometer-dashboard/api/accelerometerMovements' )
+def httpPost = new HTTPBuilder( 'http://localhost:8080/' )
 println httpPost
 
-def postBody = [activity:"Wayne's Test", alt:"126.682396", device:"iPad", diffX:"3.225708", diffY:"0.85907", diffZ:"6.219482", lat:"37.709358", lon:"-121.868416", time:"303200.44781484455", xcoord:"0.301178", ycoord:"-0.48645", zcoord:"-0.846161"]
-httpPost.post(path:'/', body: postBody, requestContentType: URLENC) { resp ->
-    println "POST Success ${response.statusLine}"
+def postBody = [id: 591, activity:"Wayne's Test", alt:"126.682396", device:"iPad", diffX:3.225708, diffY:0.85907, diffZ:6.219482, lat:"37.709358", lon:"-121.868416", time:"303200.44781484455", xcoord:"0.301178", ycoord:"-0.48645", zcoord:"-0.846161"]
+println postBody
+httpPost.post(path:'mobile-accelerometer-dashboard/api/acceleratorMovements.json', body: postBody, requestContentType: URLENC) { resp ->
+    println "POST Success ${resp.status}"
     assert resp.statusLine.statusCode == 201
 }
 */

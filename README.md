@@ -15,6 +15,11 @@ Running the program:
 2. Launch /usr/local/Cellar/springxd/1.0.0.RELEASE/bin/xd-shell
 3. Execute from xd-shell stream create --name readmove --definition "gemfire-cq --query='select * from /Movement' --host=ec2-54-187-245-145.us-west-2.compute.amazonaws.com | script --location=post.groovy | log" --deploy   
    Note:  we had to remove the filter but could probably add a where clause back in.  
-4. Launch grails app.     
+4. Launch grails app.    
+
+Test Mode:
+
+1.  Test data can be found at  /data/singlenode.json
+2.  You can populate the database with the 
 
 

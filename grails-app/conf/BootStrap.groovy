@@ -1,4 +1,5 @@
 import com.pivotal.fe.mobile.Accelerometer
+import com.pivotal.fe.mobile.AxisValue
 
 class BootStrap {
 
@@ -12,6 +13,15 @@ class BootStrap {
 		accelerometer = new Accelerometer(activity:"Running", alt:"126.682396", device:"iphone", diffX:"2.192688", diffY:"0.769043", diffZ:"2.050781", lat:"37.709358", lon:"-121.868416", time:"303201.0478148535", xcoord:"0.287018", ycoord:"-0.482788", zcoord:"-0.829727").save(flush:true)
 		accelerometer = new Accelerometer(activity:"Running", alt:"126.682396", device:"iphone", diffX:"6.163025", diffY:"2.828979", diffZ:"6.219482", lat:"37.709358", lon:"-121.868416", time:"303200.24781484157", xcoord:"0.308945", ycoord:"-0.490479", zcoord:"-0.837311").save(flush:true)
 		accelerometer = new Accelerometer(activity:"Running", alt:"126.682396", device:"iphone", diffX:"2.714539", diffY:"0.769043", diffZ:"2.316284", lat:"37.709358", lon:"-121.868416", time:"303201.54781486094", xcoord:"0.281799", ycoord:"-0.48764", zcoord:"-0.850266").save(flush:true)
+
+		// req from Edison: [ { "label": "Denver Movement x:", "n": 20 }, { "label": "Denver Movement y:", "n": 30 }, 
+		// { "label": "San Francisco Movment x:", "n": 10 }, { "label": "San Francisco Movement y:", "n": 15 } ];
+				
+		def geocode = new AxisValue(label:"Denver Movement x:", n:"20").save(flush:true)
+		geocode = new AxisValue(label: "Denver Movement y:", n: 30 ).save(flush:true)
+		geocode = new AxisValue(label: "San Francisco Movment x:", n:"10").save(flush:true)
+		geocode = new AxisValue(label: "San Francisco Movment y:", n:"15").save(flush:true)
+		
 	}
 
 	def destroy = {
