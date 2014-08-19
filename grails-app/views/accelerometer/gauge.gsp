@@ -12,7 +12,7 @@
 
 
 <script type='text/javascript'>
-	var debug = 100;
+	var debug = 1;
 	var data2 = [ { "label": "Denver Movement x:", "n": 20 }, { "label": "Denver Movement y:", "n": 30 }, { "label": "San Francisco Movment x:", "n": 10 }, { "label": "San Francisco Movement y:", "n": 15 } ];
 	var data = [ {
 		"metric" : "xdiff",
@@ -25,6 +25,7 @@
 		"rate" : "0"
 	} ];
 	var url = "http://localhost:8080/mobile-accelerometer-dashboard/api/acceleratorMovements/";
+	var randomizer = 10;
 	function getUpdate(){
 	 var displayUrl = url + debug;
 	 console.log("callback start.");
@@ -39,27 +40,28 @@
 	 data[0]["rate"] = responseTxt["diffX"];
 	 data[1]["rate"] = responseTxt["diffY"];
 	 data[2]["rate"] = responseTxt["diffZ"];
+	 randomizer = responseTxt["diffX"];
 	 updateGauges();
 	 }
 	 console.log("callback end.");
 	 debug = debug + 1;	
-	 if (debug > 600) {
+	 if (debug > 400) {
 		 debug = 1}
 	} 
 
 	function getHistoricalUpdate(){
-		 var displayUrl = "http://localhost:8080/mobile-accelerometer-dashboard/api/axisValues/";
+		 var displayUrl = "http://localhost:8080/mobile-accelerometer-dashboard/api/barchartData/";
 		 console.log("callback start.");
 		 console.log("displayUrl = " + displayUrl);
-		 request=new XMLHttpRequest(); request.onreadystatechange=getHistoricalUpdateCallBack;
-		 request.open('GET',displayUrl,true); request.send();
+		 request2=new XMLHttpRequest(); request2.onreadystatechange=getHistoricalUpdateCallBack;
+		 request2.open('GET',displayUrl,true); request2.send();
 		};
 		function getHistoricalUpdateCallBack(){
-		 if(request.readyState == 4){
-		 console.log("callback back." + request.responseText);
-		 var responseTxt=JSON.parse(request.responseText);
-		 data = responseTxt;
-		 barchart('barchart1', data);
+		 if(request2.readyState == 4){
+		 console.log("callback back." + request2.responseText);
+		 var responseTxt=JSON.parse(request2.responseText);
+		 data2 = responseTxt;
+		 barchart('barchart1', data2);
 		 }
 		 console.log("callback end.");
 		} 
@@ -89,30 +91,31 @@
 		
 		var max_n = 0;
 		for (var d in data) {
-			max_n = Math.max(data[d].n, max_n);
+			max_n = Math.max(parseInt(data[d].avgDiffX, 10), max_n);
 		}
 			
 		var dx = w / max_n;
 		var dy = h / data.length;
+		var lookup = {251: 'Walking', 152: 'Running', 4: "Crawl", 2: 'Sitting', 3 : 'Stretch'}
 		
 		var bars = svg.selectAll(".bar")
 			.data(data)
 			.enter()
 			.append("rect")
-			.attr("class", function(d, i) {return "bar " + d.label;})
+			.attr("class", function(d, i) {return "bar " + lookup[d.id];})
 			.attr("x", function(d, i) {return 0;})
 			.attr("y", function(d, i) {return dy*i;})
-			.attr("width", function(d, i) {return dx*d.n})
+			.attr("width", function(d, i) {return dx * parseInt(d.avgDiffX + randomizer, 10)})
 			.attr("height", dy);
-
+		var label = 'Default';
 		var text = svg.selectAll("text")
 			.data(data)
 			.enter()
 			.append("text")
-			.attr("class", function(d, i) {return "label " + d.label;})
+			.attr("class", function(d, i) {return lookup[d.id];})
 			.attr("x", 5)
 			.attr("y", function(d, i) {return dy*i + 15;})
-			.text( function(d) {return d.label + " (" + d.n  + ")";})
+			.text( function(d) {return (lookup[d.id]) + " (" + parseInt(d.avgDiffX + randomizer, 10)  + ")";})
 			.attr("font-size", "10px")
 			.style("font-weight", "bold");
 	};

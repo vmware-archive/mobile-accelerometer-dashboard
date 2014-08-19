@@ -1,4 +1,3 @@
-package com.pivotal.fe.mobile
 
 import org.grails.datastore.mapping.query.Projections
 import org.hibernate.Hibernate
@@ -19,23 +18,22 @@ class Accelerometer {
 		String xcoord 
 		String ycoord
 		String zcoord
-		Double avgDiffX
-		Double avgDiffY
-		Double avgDiffZ
 		
 		static mapping = {
 			table 'accelerometer'
 			id generator: 'identity'
+/*
 			avgDiffX formula: "avg(diffX)"
 			avgDiffY formula: "avg(diffY)"
 			avgDiffZ formula: "avg(diffZ)"
-			
+*/			
 		}
 
     static constraints = {
     }
 	
 	def barchartProjection () {
+/*		
 		def results = criteria {
 			projections {
 				addProjectionToList(Projections.sqlGroupProjection(
@@ -47,5 +45,6 @@ class Accelerometer {
 			}
 	   }
 		return results
+*/		
 	}
 }

@@ -22,6 +22,24 @@ EVICTION BY CRITERIA ( ID < 300000 )
 EVICTION FREQUENCY 50 SECONDS
 hdfsstore (accelerometerstore) WRITEONLY;
 
+create table BarchartData (
+	activity 	BIGINT PRIMARY KEY,
+	AvgDiffX	DOUBLE,
+	AvgDiffY	DOUBLE,
+	AvgDiffZ	DOUBLE
+)
+
+	
+	
+-- populate with 
+insert into  BarchartData ( 
+select count(activity) as Activity, avg(diffX) as AvgDiffX, avg(diffY) as AvgDiffY, avg(diffZ) as AvgDiffZ
+from Accelerometer
+group by activity
+-- having activity in ('Running', 'Walking')
+ 
+
+
 CREATE TABLE Axis_Value
 (
 ID        	BIGINT generated always as identity PRIMARY KEY,
