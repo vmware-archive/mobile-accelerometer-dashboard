@@ -29,7 +29,7 @@ class AccelerometerRestController extends RestfulController{
 	}
 
 	def barchartProjection () {
-		
+/*		
 		def results = criteria {
 			projections {
 				addProjectionToList(Projections.sqlGroupProjection(
@@ -41,6 +41,7 @@ class AccelerometerRestController extends RestfulController{
 			}
 	   }
 		return results
+*/		
 	}
 
 }				

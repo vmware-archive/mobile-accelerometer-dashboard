@@ -1,9 +1,9 @@
 
-import org.grails.datastore.mapping.query.Projections
-import org.hibernate.Hibernate
-import org.hibernate.type.Type
+import grails.rest.Resource
+import groovy.transform.ToString
 
-// @Resource(uri="/accelerometer", formats=['json'])
+@Resource(uri="/accelerometer", formats=['json'])
+@ToString
 class Accelerometer {
 		long id
 		String activity
