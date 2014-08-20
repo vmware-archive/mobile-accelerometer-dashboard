@@ -1,11 +1,10 @@
 package com.pivotal.fe.mobile
 
-import grails.converters.JSON
 import grails.rest.RestfulController
-import org.hibernate.type.StandardBasicTypes
 
-import javax.print.DocFlavor.STRING
-
+import org.grails.datastore.mapping.query.Projections
+import org.hibernate.Hibernate
+import com.pivotal.fe.mobile.Accelerometer
 
 class AccelerometerRestController extends RestfulController{
 	static responseFormats = ["json"]
@@ -15,7 +14,8 @@ class AccelerometerRestController extends RestfulController{
 	}
 
 	def activityAcceleration () {
-		def a = Accelerometer.withCriteria {
+/*
+				def a = Accelerometer.withCriteria {
 		
 			projections {
 				groupProperty('activity')
@@ -25,11 +25,23 @@ class AccelerometerRestController extends RestfulController{
 			}
 		}
 		respond a as JSON
+*/	
 	}
 
-	def barchartDataProjection() {
-		def results = accelerometerInstance.barchartProjection
-		respond results as JSON
+	def barchartProjection () {
+		
+		def results = criteria {
+			projections {
+				addProjectionToList(Projections.sqlGroupProjection(
+				"activity as activity, avg(diffX) as AvgDiffX, avg(diffY) as AvgDiffY, avg(diffZ) as AvgDiffZ",
+					["activity", "AvgDiffX", "AvgDiffY", "AvgDiffZ"].toArray(new String[4]),
+					[Hibernate.STRING, Hibernate.DOUBLE, Hibernate.DOUBLE, hibernate.DOUBLE].toArray(new Type[4])),
+					'barchartDataProjection'
+				)
+			}
+	   }
+		return results
 	}
+
 }				
 

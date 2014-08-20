@@ -38,7 +38,7 @@ from Accelerometer
 group by activity
 -- having activity in ('Running', 'Walking')
  
-
+CALL SYSCS_UTIL.EXPORT_TABLE (null, 'ACCELEROMETER', '/Users/wlund/accelerometer.del', null, null,null);
 
 CREATE TABLE Axis_Value
 (

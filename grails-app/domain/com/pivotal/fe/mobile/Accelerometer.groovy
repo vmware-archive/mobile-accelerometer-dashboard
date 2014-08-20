@@ -32,19 +32,5 @@ class Accelerometer {
     static constraints = {
     }
 	
-	def barchartProjection () {
-/*		
-		def results = criteria {
-			projections {
-				addProjectionToList(Projections.sqlGroupProjection(
-				"activity as activity, avg(diffX) as AvgDiffX, avg(diffY) as AvgDiffY, avg(diffZ) as AvgDiffZ",
-					["activity", "AvgDiffX", "AvgDiffY", "AvgDiffZ"].toArray(new String[4]),
-					[Hibernate.STRING, Hibernate.DOUBLE, Hibernate.DOUBLE, hibernate.DOUBLE].toArray(new Type[4])),
-					'barchartDataProjection'
-				)
-			}
-	   }
-		return results
-*/		
-	}
+
 }
